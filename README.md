@@ -10,3 +10,16 @@ made with
 
 Inspired and heavily based on [stewsters/zomgRL][stewsters/zomgRL]
 [stewsters/zomgRL]:https://github.com/stewsters/zomgRL
+
+Compile
+=======
+To compile from source you will need Java 7 and to install groovy and gradle.  I recommend using http://gvmtool.net/ for that.
+Once you are set up, it will be something like:
+
+```bash
+git clone https://github.com/bartoleo/GFlappyAsciiBird.git
+
+cd GFlappyAsciiBird
+
+gradle run
+```
