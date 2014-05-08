@@ -1,7 +1,7 @@
 package com.bartoleo.gflappyasciibird.input;
 
 import com.bartoleo.gflappyasciibird.entity.Player;
-import com.bartoleo.gflappyasciibird.main.Main;
+import com.bartoleo.gflappyasciibird.game.Game;
 
 import javax.swing.event.MouseInputListener;
 import java.awt.event.KeyEvent;
@@ -17,10 +17,10 @@ import static java.awt.event.KeyEvent.VK_UNDEFINED;
 public class CharacterInputListener implements MouseInputListener, KeyListener {
 
 
-    Main context;
+    Game context;
     Player player;
 
-    public CharacterInputListener(Main context, Player player) {
+    public CharacterInputListener(Game context, Player player) {
         this.context = context;
         this.player = player;
     }

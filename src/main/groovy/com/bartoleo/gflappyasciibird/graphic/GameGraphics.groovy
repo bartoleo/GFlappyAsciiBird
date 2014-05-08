@@ -1,19 +1,19 @@
-package com.bartoleo.gflappyasciibird.map
+package com.bartoleo.gflappyasciibird.graphic
 
 import com.bartoleo.gflappyasciibird.entity.Pipe
 import com.bartoleo.gflappyasciibird.entity.Player
-import com.bartoleo.gflappyasciibird.graphic.RenderConfig
+import com.bartoleo.gflappyasciibird.game.GameState
 import squidpony.squidcolor.SColor
 import squidpony.squidcolor.SColorFactory
 import squidpony.squidgrid.gui.swing.SwingPane
 
-class LevelMap {
+class GameGraphics {
 
     public int xSize
     public int ySize
 
 
-    public LevelMap(int x, int y) {
+    public GameGraphics(int x, int y) {
         xSize = x
         ySize = y
     }
@@ -40,10 +40,13 @@ class LevelMap {
         }
         display.placeCharacter(xRange, yRange, '+' as char, SColor.DARK_GRAY)
 
-        display.placeHorizontalString(xRange+2,2,"Score")
-        display.placeHorizontalString(xRange+2,4,score.toString())
+        display.placeHorizontalString(xRange + 2, 2, "Score")
+        display.placeHorizontalString(xRange + 2, 4, score.toString())
 
-//
+        if (params.game.state == GameState.gameOver){
+            display.placeHorizontalString(xRange/2 as int, yRange/2 as int, "GAME OVER")
+        }
+
         int y = player.y
         int x = player.x
         player.character.eachLine {
@@ -54,20 +57,21 @@ class LevelMap {
                 display.placeCharacter(x, y, ch, SColorFactory.asSColor(255, 255, 255));
             }
         }
+
         pipeList.each {
             String pipeString
-            for (int i=1;i<yRange;i++){
-                if (i<it.height||i>it.height+it.hole){
+            for (int i = 1; i < yRange; i++) {
+                if (i < it.height || i > it.height + it.hole) {
                     pipeString = it.pipeMiddle
-                } else if (i==it.height||i==it.height+it.hole){
+                } else if (i == it.height || i == it.height + it.hole) {
                     pipeString = it.pipeStart
                 } else {
-                    pipeString=""
+                    pipeString = ""
                 }
                 int px = it.x
                 for (char ch : pipeString.toCharArray()) {
                     px++
-                    if (px>0&&px<xRange){
+                    if (px > 0 && px < xRange) {
                         display.placeCharacter(px, i, ch, SColorFactory.asSColor(255, 255, 255));
                     }
                 }
