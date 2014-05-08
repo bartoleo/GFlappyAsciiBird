@@ -2,9 +2,9 @@ package com.bartoleo.gflappyasciibird.game
 
 import com.bartoleo.gflappyasciibird.entity.Pipe
 import com.bartoleo.gflappyasciibird.entity.Player
+import com.bartoleo.gflappyasciibird.graphic.Render
 import com.bartoleo.gflappyasciibird.graphic.RenderConfig
 import com.bartoleo.gflappyasciibird.input.CharacterInputListener
-import com.bartoleo.gflappyasciibird.graphic.GameGraphics
 import com.bartoleo.gflappyasciibird.util.MathUtils
 import squidpony.squidgrid.gui.awt.event.SGMouseListener
 import squidpony.squidgrid.gui.swing.SwingPane
@@ -26,7 +26,7 @@ class Game {
 
     public SwingPane display
     public JFrame frame
-    public GameGraphics gameGraphics
+    public Render render
     public Player player
 
     public int score = 0
@@ -38,7 +38,7 @@ class Game {
 
         // Generate map
 
-        gameGraphics = new GameGraphics(RenderConfig.screenWidth, RenderConfig.screenHeight)
+        render = new Render(RenderConfig.screenWidth, RenderConfig.screenHeight)
 
         player = new Player()
         player.x = 10
@@ -76,7 +76,7 @@ class Game {
 
         render()
 
-        this.state = GameState.game
+        this.state = GameState.menu
 
         javax.swing.Timer timer = new javax.swing.Timer(DELAY, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
@@ -93,7 +93,7 @@ class Game {
 
         clear(display)
 
-        gameGraphics.render(display: display, game:this, player: player, pipeList: pipeList, score: score)
+        render.render(display: display, game: this, player: player, pipeList: pipeList, score: score)
 
         //render stats
         //MessageLog.render(display, player)
@@ -119,7 +119,7 @@ class Game {
             player.dy += GRAVITY
             player.y += player.dy
 
-            if (player.y + 3 > RenderConfig.gameWindowY) {
+            if (player.y + player.height >= RenderConfig.gameWindowY) {
                 this.state = GameState.gameOver
             }
 
@@ -130,13 +130,13 @@ class Game {
                     it.scored = false
                 }
                 if (MathUtils.checkCollide(player.x, player.y as int, player.width, player.height, it.x as int, 0, it.width, it.height) ||
-                    MathUtils.checkCollide(player.x, player.y as int, player.width, player.height, it.x as int, it.height+it.hole, it.width, RenderConfig.gameWindowY - it.height - it.hole)){
+                        MathUtils.checkCollide(player.x, player.y as int, player.width, player.height, it.x as int, it.height + it.hole, it.width, RenderConfig.gameWindowY - it.height - it.hole)) {
                     this.state = GameState.gameOver
                 }
             }
 
             pipeList.removeAll {
-                it.x <= 7
+                it.x <= -it.width
             }
 
 
@@ -160,6 +160,10 @@ class Game {
         if (this.state == GameState.game) {
 
             player.dy = JUMP
+
+        } else if (this.state == GameState.menu) {
+
+            this.state = GameState.game
 
         }
     }

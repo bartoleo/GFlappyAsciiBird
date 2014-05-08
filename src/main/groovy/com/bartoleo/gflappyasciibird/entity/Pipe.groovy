@@ -9,7 +9,7 @@ public class Pipe {
     public String pipeStart = """\
 [=======]"""
     public String pipeMiddle = """\
- |     |"""
+ |    #|"""
     int width = pipeStart.length()
 
 }

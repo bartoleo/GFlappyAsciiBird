@@ -7,13 +7,13 @@ import squidpony.squidcolor.SColor
 import squidpony.squidcolor.SColorFactory
 import squidpony.squidgrid.gui.swing.SwingPane
 
-class GameGraphics {
+class Render {
 
     public int xSize
     public int ySize
 
 
-    public GameGraphics(int x, int y) {
+    public Render(int x, int y) {
         xSize = x
         ySize = y
     }
@@ -43,8 +43,15 @@ class GameGraphics {
         display.placeHorizontalString(xRange + 2, 2, "Score")
         display.placeHorizontalString(xRange + 2, 4, score.toString())
 
-        if (params.game.state == GameState.gameOver){
-            display.placeHorizontalString(xRange/2 as int, yRange/2 as int, "GAME OVER")
+        if (params.game.state == GameState.gameOver) {
+            display.placeHorizontalString(xRange / 2 as int, yRange / 2 as int, "GAME OVER")
+        }
+        if (params.game.state == GameState.menu) {
+            display.placeHorizontalString((xRange / 2 - 16) as int, yRange / 2 as int, "Press a key or mouse button to start & jump")
+        }
+
+        xRange.times { i ->
+            display.placeCharacter(i, yRange-1, 'm' as char, SColor.GREEN)
         }
 
         int y = player.y
@@ -77,6 +84,8 @@ class GameGraphics {
                 }
             }
         }
+
+
 
     }
 
