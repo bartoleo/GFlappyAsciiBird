@@ -7,13 +7,13 @@ import squidpony.squidcolor.SColor
 import squidpony.squidcolor.SColorFactory
 import squidpony.squidgrid.gui.swing.SwingPane
 
-class Render {
+class Renderer {
 
     public int xSize
     public int ySize
 
 
-    public Render(int x, int y) {
+    public Renderer(int x, int y) {
         xSize = x
         ySize = y
     }

@@ -2,7 +2,7 @@ package com.bartoleo.gflappyasciibird.game
 
 import com.bartoleo.gflappyasciibird.entity.Pipe
 import com.bartoleo.gflappyasciibird.entity.Player
-import com.bartoleo.gflappyasciibird.graphic.Render
+import com.bartoleo.gflappyasciibird.graphic.Renderer
 import com.bartoleo.gflappyasciibird.graphic.RenderConfig
 import com.bartoleo.gflappyasciibird.input.CharacterInputListener
 import com.bartoleo.gflappyasciibird.util.MathUtils
@@ -26,7 +26,7 @@ class Game {
 
     public SwingPane display
     public JFrame frame
-    public Render render
+    public Renderer renderer
     public Player player
 
     public int score = 0
@@ -38,7 +38,7 @@ class Game {
 
         // Generate map
 
-        render = new Render(RenderConfig.screenWidth, RenderConfig.screenHeight)
+        renderer = new Renderer(RenderConfig.screenWidth, RenderConfig.screenHeight)
 
         player = new Player()
         player.x = 10
@@ -93,7 +93,7 @@ class Game {
 
         clear(display)
 
-        render.render(display: display, game: this, player: player, pipeList: pipeList, score: score)
+        renderer.render(display: display, game: this, player: player, pipeList: pipeList, score: score)
 
         //render stats
         //MessageLog.render(display, player)
