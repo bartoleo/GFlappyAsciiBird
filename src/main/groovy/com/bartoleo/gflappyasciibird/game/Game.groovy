@@ -127,7 +127,7 @@ class Game {
                 it.x -= SPEED
                 if (!it.scored && it.x < player.x) {
                     score++
-                    it.scored = false
+                    it.scored = true
                 }
                 if (MathUtils.checkCollide(player.x, player.y as int, player.width, player.height, it.x as int, 0, it.width, it.height) ||
                         MathUtils.checkCollide(player.x, player.y as int, player.width, player.height, it.x as int, it.height + it.hole, it.width, RenderConfig.gameWindowY - it.height - it.hole)) {

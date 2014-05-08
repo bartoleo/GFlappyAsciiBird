@@ -43,13 +43,6 @@ class Renderer {
         display.placeHorizontalString(xRange + 2, 2, "Score")
         display.placeHorizontalString(xRange + 2, 4, score.toString())
 
-        if (params.game.state == GameState.gameOver) {
-            display.placeHorizontalString(xRange / 2 as int, yRange / 2 as int, "GAME OVER")
-        }
-        if (params.game.state == GameState.menu) {
-            display.placeHorizontalString((xRange / 2 - 16) as int, yRange / 2 as int, "Press a key or mouse button to start & jump")
-        }
-
         xRange.times { i ->
             display.placeCharacter(i, yRange-1, 'm' as char, SColor.GREEN)
         }
@@ -85,7 +78,12 @@ class Renderer {
             }
         }
 
-
+        if (params.game.state == GameState.gameOver) {
+            display.placeHorizontalString(xRange / 2 as int, yRange / 2 as int, "GAME OVER")
+        }
+        if (params.game.state == GameState.menu) {
+            display.placeHorizontalString((xRange / 2 - 16) as int, yRange / 2 as int, "Press a key or mouse button to start & jump")
+        }
 
     }
 
