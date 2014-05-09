@@ -26,6 +26,6 @@ gradle run
 
 As GroovyScript
 ===================
-download this gist [https://gist.github.com/bartoleo/3392215d144130164a04] 
+download this gist https://gist.github.com/bartoleo/3392215d144130164a04
 and run it with groovy
 groovy GFlappyAsciiBird_v1.0.groovy
